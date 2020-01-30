@@ -2,16 +2,18 @@ module CdtBaas
 
 	class CdtAuth 
 
-      def initialize(token, env)
+      def initialize(token, env, custom_url, custom_user, custom_pass)
         @request = CdtRequest.new("Basic #{token}", token)
         @basic = token
-        @url = ENV["CUSTOM_AUTH_URL"]
+        @url = custom_url
+        @username = custom_user
+        @password = custom_pass
       end
 
 
       def generateToken
         puts @url
-        response = @request.postWithHeader(@url, {:username => ENV["CUSTOM_AUTH_USER"], :password => ENV["CUSTOM_AUTH_PASS"]}, [{:key => 'Content-Type', :value => "application/json"}])
+        response = @request.postWithHeader(@url, {:username => @username, :password => @password}, [{:key => 'Content-Type', :value => "application/json"}])
         puts response.to_s
         puts response.to_s
         token = CdtModel.new(response)

@@ -2,13 +2,12 @@ module CdtBaas
 
   class CdtModule
 
-      def startModule(token, env)
-        @auth = CdtAuth.new(token, env)
+      def startModule(token, env, custom_url, custom_user, custom_pass)
+        @auth = CdtAuth.new(token, env, custom_url, custom_user, custom_pass)
         @basic = token
         refreshToken
         @request = CdtRequest.new(nil, @basic)
-        @url = CdtHelper.homologation?(env) ? URL_HML : URL_PRD
-        @url = CdtHelper.customAuth?(env) ? URL_CUSTOM_AUTH : @url
+        @url = URL_PRD
       end
 
       def refreshToken
