@@ -1,5 +1,5 @@
 require 'json'
-
+   
 module CdtBaas
 	class CdtHelper
 		
@@ -13,9 +13,13 @@ module CdtBaas
 
 		def self.saveToken(basic,token)
 			if !token.nil?
-				ENV["CDT_TOKEN"] = token.to_s
+				ENV["CDT_TOKEN_ONLY"] = token.to_s
 				ENV["CDT_TOKEN_EXPIRY"] = (Time.now + 1500).to_s
 			end
+		end
+
+		def self.getToken
+			ENV["CDT_TOKEN_ONLY"]
 		end
 
 		def self.shouldRefreshToken?(basic)
