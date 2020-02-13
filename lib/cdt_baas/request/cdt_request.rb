@@ -8,7 +8,7 @@ module CdtBaas
       if !token.nil?
         auth = token
       else
-        auth = ENV["CDT_TOKEN#{basic[0,6]}"]
+        auth = ENV["CDT_TOKEN"]
       end
       @headers = {
           "Content-Type" => 'application/x-www-form-urlencoded',
